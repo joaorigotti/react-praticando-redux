@@ -5,7 +5,44 @@ export const changeNumber = e => ({
   payload: parseInt(e.target.value, 10),
 });
 
-export const apply = (number) => {
+export const sum = (n1, n2) => {
+  const payload = n1 + n2;
+
+  return {
+    type: actionTypes.ADDED,
+    payload,
+  };
+};
+
+export const subtract = (n1, n2) => {
+  const payload = n1 - n2;
+
+  return {
+    type: actionTypes.SUBTRACTED,
+    payload,
+  };
+};
+
+export const multiply = (n1, n2) => {
+  const payload = n1 * n2;
+
+  return {
+    type: actionTypes.MULTIPLIED,
+    payload,
+  };
+};
+
+export const division = (n1, n2) => {
+  const div = n2 === 0 ? 1 : n2;
+  const payload = n1 / div;
+
+  return {
+    type: actionTypes.DIVIDED,
+    payload,
+  };
+};
+
+export const handleSubmit = (number) => {
   const payload = {};
 
   /* eslint-disable no-underscore-dangle */
@@ -13,8 +50,11 @@ export const apply = (number) => {
   payload.number = parseInt(number, 10);
   payload.randomNumber = Math.round(Math.random() * number * 100);
 
-  return {
-    type: actionTypes.APPLIED,
-    payload,
-  };
+  return [
+    { type: actionTypes.SUBMITTED, payload },
+    sum(payload.randomNumber, payload.number),
+    subtract(payload.randomNumber, payload.number),
+    multiply(payload.randomNumber, payload.number),
+    division(payload.randomNumber, payload.number),
+  ];
 };

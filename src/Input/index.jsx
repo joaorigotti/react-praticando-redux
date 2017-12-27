@@ -12,14 +12,14 @@ const Input = props => (
       min="0"
       onChange={props.changeNumber}
     />
-    <button onClick={() => props.apply(props.number)}>Aplicar</button>
+    <button onClick={() => props.handleSubmit(props.number)}>Aplicar</button>
   </div>
 );
 
 Input.propTypes = {
   number: PropTypes.number.isRequired,
   changeNumber: PropTypes.func.isRequired,
-  apply: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default Input;
