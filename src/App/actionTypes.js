@@ -1,0 +1,4 @@
+export default {
+  NUMBER_CHANGED: 'NUMBER_CHANGED',
+  APPLIED: 'APPLIED',
+};
