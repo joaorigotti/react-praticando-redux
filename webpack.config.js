@@ -6,6 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, '/public'),
     filename: './app.js',
   },
+  devtool: 'source-map',
   devServer: {
     port: 3000,
     contentBase: './public',
@@ -18,11 +19,12 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.js[x]$/,
+      test: /\.js$|\.jsx$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
       query: {
-        presets: ['es2017', 'react'],
+        presets: ['react', 'es2017'],
+        plugins: ['transform-object-rest-spread'],
       },
     }],
   },
