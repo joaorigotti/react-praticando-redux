@@ -42,6 +42,13 @@ export const division = (n1, n2) => {
   };
 };
 
+export const applyCalculations = payload => [
+  sum(payload.randomNumber, payload.number),
+  subtract(payload.randomNumber, payload.number),
+  multiply(payload.randomNumber, payload.number),
+  division(payload.randomNumber, payload.number),
+];
+
 export const handleSubmit = (number) => {
   const payload = {};
 
@@ -52,9 +59,6 @@ export const handleSubmit = (number) => {
 
   return [
     { type: actionTypes.SUBMITTED, payload },
-    sum(payload.randomNumber, payload.number),
-    subtract(payload.randomNumber, payload.number),
-    multiply(payload.randomNumber, payload.number),
-    division(payload.randomNumber, payload.number),
+    applyCalculations(payload),
   ];
 };

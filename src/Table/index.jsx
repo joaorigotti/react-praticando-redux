@@ -3,18 +3,23 @@ import PropTypes from 'prop-types';
 
 const TableHeader = () => (
   <tr>
-    <th>Número</th>
     <th>Número randômico</th>
+    <th>Número</th>
   </tr>
 );
 
-const TableRow = item => (
-  /* eslint-disable no-underscore-dangle */
-  <tr key={item._id}>
-    <td>{item.number}</td>
-    <td>{item.randomNumber}</td>
-  </tr>
-);
+const renderRows = (props) => {
+  const { data } = props;
+  const { selectLine } = props;
+
+  return data.map(item => (
+    /* eslint-disable no-underscore-dangle */
+    <tr key={item._id} onClick={() => selectLine(item)}>
+      <td>{item.randomNumber}</td>
+      <td>{item.number}</td>
+    </tr>
+  ));
+};
 
 const Table = props => (
   <table>
@@ -22,13 +27,14 @@ const Table = props => (
       {TableHeader()}
     </thead>
     <tbody>
-      {props.data.map(TableRow)}
+      {renderRows(props)}
     </tbody>
   </table>
 );
 
 Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectLine: PropTypes.func.isRequired,
 };
 
 export default Table;

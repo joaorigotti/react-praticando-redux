@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeNumber, handleSubmit } from './actionCreators';
+import { changeNumber, handleSubmit, applyCalculations } from './actionCreators';
 
 import Input from '../Input';
 import Table from '../Table';
@@ -16,7 +16,7 @@ const App = props => (
         changeNumber={props.changeNumber}
         handleSubmit={props.handleSubmit}
       />
-      <Table data={props.numberList} />
+      <Table data={props.numberList} selectLine={props.applyCalculations} />
     </div>
 
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -33,7 +33,8 @@ App.propTypes = {
   numberList: PropTypes.arrayOf(PropTypes.object).isRequired,
   changeNumber: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  result: PropTypes.objectOf(PropTypes.object).isRequired,
+  result: PropTypes.objectOf(PropTypes.number).isRequired,
+  applyCalculations: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -45,6 +46,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (bindActionCreators({
   changeNumber,
   handleSubmit,
+  applyCalculations,
 }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
